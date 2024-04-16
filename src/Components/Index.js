@@ -106,7 +106,7 @@ function Index() {
     e.preventDefault();
     setErrMsg("");
     if (id === "") {
-      setErrMsg("아이디를 입력하세요!");
+      setErrMsg("아이디를 입력하세요");
       return false;
     }
     if (pwd === "") {
