@@ -143,7 +143,7 @@ function List() {
           <div className="border-y border-black bg-blue-100 flex justify-between gap-x-2 p-2">
             <div className="w-[64px] text-center">번호</div>
             <div className="w-full text-center">제목</div>
-            <div className="w-[200px] text-center">답변확인</div>
+            <div className="w-[200px] text-center">답변보기</div>
             <div className="w-[200px] text-center">작성자</div>
             <div className="w-[200px] text-center">등록일</div>
             <div className="w-[200px] text-center">상태</div>
@@ -170,7 +170,7 @@ function List() {
                       {post.numOfComments > 0 && (
                         <span
                           className="text-gray-400 hover:cursor-pointer hover:text-rose-500"
-                          title="눌러서 답변확인"
+                          title="눌러서 답변보기"
                           onClick={() => {
                             if (selectedPost !== post.postCode) {
                               setSelectedPost(post.postCode);
@@ -194,7 +194,7 @@ function List() {
                           }
                         }}
                       >
-                        {selectedPost !== post.postCode ? "답변확인" : "닫기"}
+                        {selectedPost !== post.postCode ? "답변보기" : "닫기"}
                       </button>
                     </div>
                     <div className="w-[200px] text-center">

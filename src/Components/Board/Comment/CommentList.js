@@ -19,9 +19,11 @@ function CommentList(props) {
               }`}
             >
               <div className="w-[10%]">{com.userName}</div>
-              <div className="w-[75%] mx-[2.5%] text-left">{com.content}</div>
+              <div className="w-[75%] mx-[2.5%] text-left text-wrap break-words">
+                {com.content}
+              </div>
               <div className="w-[10%]">
-                {dayjs(new Date(com.regDate)).format("YYYY-MM-DD hh:mm:ss")}
+                {dayjs(new Date(com.regDate)).format("YYYY-MM-DD")}
               </div>
             </div>
           ))}

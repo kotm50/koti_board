@@ -7,8 +7,8 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import axiosInstance from "../Api/axiosInstance";
 import Menu from "./Layout/Menu";
 
-function Board() {
-  const [title, setTitle] = useState("광고 게시판");
+function Sheet() {
+  const [title, setTitle] = useState("통합광고진행표");
   const [open, setOpen] = useState(true);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function Board() {
           {!open ? <FaCaretRight size={32} /> : <FaCaretLeft size={32} />}
         </button>
         <div>
-          <Link to="/main">
+          <Link to="/collect">
             <h2 className="font-bold px-4 text-xl h-[48px] flex flex-col justify-center">
               통합광고진행표
             </h2>
@@ -70,4 +70,4 @@ function Board() {
   );
 }
 
-export default Board;
+export default Sheet;

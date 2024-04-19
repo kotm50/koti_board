@@ -64,7 +64,7 @@ function Index() {
               refreshToken: refresh,
             })
           );
-          navi("/board/list/B06");
+          navi("/main");
         } else if (res.data.code === "A300") {
           dispatch(
             loginUser({
@@ -78,7 +78,7 @@ function Index() {
               refreshToken: refresh,
             })
           );
-          navi("/board/list/B06");
+          navi("/main");
         } else if (res.data.code === "A400") {
           dispatch(
             loginUser({
@@ -92,7 +92,7 @@ function Index() {
               refreshToken: refresh,
             })
           );
-          navi("/board/list/B06");
+          navi("/main");
         } else {
           setErrMsg("잘못된 계정을 입력하셨습니다. 관리자에게 문의하세요");
           return false;
