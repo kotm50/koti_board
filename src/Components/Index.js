@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import axios from "axios";
-import { clearUser, loginUser } from "../Reducer/userSlice";
+import { loginUser } from "../Reducer/userSlice";
 
 function Index() {
+  const user = useSelector(state => state.user);
   const inputPwdRef = useRef();
   const dispatch = useDispatch();
   const navi = useNavigate();
@@ -14,7 +15,9 @@ function Index() {
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
-    dispatch(clearUser());
+    if (user.accessToken) {
+      navi("/main");
+    }
     //eslint-disable-next-line
   }, []);
 
@@ -119,7 +122,7 @@ function Index() {
     <>
       <div className="fixed left-1/2 top-1/2 w-fit h-fit -translate-x-1/2 -translate-y-1/2">
         <div className="text-6xl pplight text-rose-600">
-          코리아티엠 광고게시판
+          코리아티엠 광고전산
         </div>
         <form onSubmit={handleSubmit}>
           <div className="mt-48 p-4 rounded border boder-gray-200 bg-gray-50 shadow-lg grid grid-cols-1 gap-y-3">

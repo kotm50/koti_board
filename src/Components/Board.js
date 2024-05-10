@@ -43,7 +43,7 @@ function Board() {
           {!open ? <FaCaretRight size={32} /> : <FaCaretLeft size={32} />}
         </button>
         <div>
-          <Link to="/main">
+          <Link to="/board">
             <h2 className="font-bold px-4 text-xl h-[48px] flex flex-col justify-center">
               통합광고진행표
             </h2>
