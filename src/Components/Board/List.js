@@ -64,6 +64,7 @@ function List() {
     if (searchKeyword) {
       data.searchKeyword = searchKeyword;
     }
+    console.log(data);
     await axiosInstance
       .post("/api/v1/board/manager/post/list", data, {
         headers: { Authorization: user.accessToken },

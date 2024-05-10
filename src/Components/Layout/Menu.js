@@ -50,7 +50,7 @@ function Menu(props) {
         </Link>
         <Link
           to="/board/list/B04"
-          className={`px-3 py-2 text-sm hover:bg-gray-200 hover:text-rose-500 transition-all duration-300`}
+          className={`hidden px-3 py-2 text-sm hover:bg-gray-200 hover:text-rose-500 transition-all duration-300`}
         >
           회의록 게시판
         </Link>

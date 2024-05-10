@@ -513,7 +513,7 @@ function InputAd(props) {
                   htmlFor="registeredStatus"
                   className="p-2 text-nowrap text-right w-[10%] min-w-[100px]"
                 >
-                  광고등록여부 {registeredStatus}
+                  광고등록여부
                 </label>
                 <select
                   id="registeredStatus"
@@ -628,31 +628,27 @@ function InputAd(props) {
           </div>
           <div className="flex flex-col justify-start gap-y-2">
             {searchComp && (
-              <div className="p-2 bg-gray-100">
-                <InputCompanyList
-                  compCode={compCode}
-                  setCompCode={setCompCode}
-                  compName={compName}
-                  setCompName={setCompName}
-                  setSearchComp={setSearchComp}
-                  searchComp={searchComp}
-                  user={props.user}
-                />
-              </div>
+              <InputCompanyList
+                compCode={compCode}
+                setCompCode={setCompCode}
+                compName={compName}
+                setCompName={setCompName}
+                setSearchComp={setSearchComp}
+                searchComp={searchComp}
+                user={props.user}
+              />
             )}
 
             {searchPartner && (
-              <div className="p-2 bg-gray-100">
-                <InputPartner
-                  partnerId={partnerId}
-                  setPartnerId={setPartnerId}
-                  partnerName={partnerName}
-                  setPartnerName={setPartnerName}
-                  setSearchPartner={setSearchPartner}
-                  searchComp={searchComp}
-                  user={props.user}
-                />
-              </div>
+              <InputPartner
+                partnerId={partnerId}
+                setPartnerId={setPartnerId}
+                partnerName={partnerName}
+                setPartnerName={setPartnerName}
+                setSearchPartner={setSearchPartner}
+                searchComp={searchComp}
+                user={props.user}
+              />
             )}
           </div>
         </div>
