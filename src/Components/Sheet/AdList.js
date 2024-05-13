@@ -17,21 +17,24 @@ function AdList() {
   const parsed = queryString.parse(thisLocation.search);
   const page = parsed.page || 1;
   const keyword = parsed.keyword || null;
+  const type = parsed.type;
   const [list, setList] = useState([]);
   const [totalPage, setTotalPage] = useState(1);
   const [pagenate, setPagenate] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchType, setSearchType] = useState("");
 
   const [modalOn, setModalOn] = useState(false);
   const [adInfo, setAdInfo] = useState(null);
   const user = useSelector(state => state.user);
 
   useEffect(() => {
-    getList(page, keyword);
+    getList(page, keyword, type);
     //eslint-disable-next-line
   }, [thisLocation]);
 
-  const getList = async (page, keyword) => {
+  const getList = async (page, keyword, type) => {
+    setList([]);
     let pageNum = 1;
     if (page) {
       pageNum = Number(page);
@@ -42,14 +45,15 @@ function AdList() {
     };
     if (keyword) {
       data.searchKeyword = keyword;
+      data.searchType = type;
       setSearchKeyword(keyword);
+      setSearchType(type);
     }
     await axiosInstance
       .post("/api/v1/ad/prog/list", data, {
         headers: { Authorization: user.accessToken },
       })
       .then(res => {
-        console.log(res);
         setList(res.data.progressList);
         const totalP = res.data.totalPages;
         setTotalPage(res.data.totalPages);
@@ -102,7 +106,7 @@ function AdList() {
       return alert("검색어를 입력하세요");
     }
     const keyword = searchKeyword.trim();
-    let domain = `${pathName}?page=1${
+    let domain = `${pathName}?page=1&type=${searchType}${
       keyword !== "" ? `&keyword=${keyword}` : ""
     }`;
     navi(domain);
@@ -115,23 +119,35 @@ function AdList() {
   };
 
   return (
-    <div className="px-4">
-      <div className="flex justify-between mb-4">
-        <button
-          className="py-2 px-5 bg-blue-600 text-white rounded-lg"
-          onClick={() => {
-            setModalOn(true);
-          }}
-        >
-          광고 등록
-        </button>
-        <div className="flex justify-start gap-x-2">
+    <div className="px-4 relative z-0">
+      <div className="flex justify-between mb-4 w-full bg-gray-100 py-2 sticky top-0 min-w-fit">
+        <div className="flex justify-start gap-x-2 w-full">
+          <select
+            id=""
+            className="p-1 border bg-white focus:border-gray-500 uppercase w-[120px]"
+            onChange={e => setSearchType(e.currentTarget.value)}
+            value={searchType}
+          >
+            <option value="">검색분류</option>
+            <option value="1">파트너</option>
+            <option value="2">고객사번호</option>
+            <option value="3">고객사 또는 지점명</option>
+          </select>
           <input
             value={searchKeyword}
             className="border border-gray-300 p-2 w-80 block rounded font-neo"
-            placeholder="지점명/담당자명 으로 검색"
+            placeholder={
+              searchType === "1"
+                ? "파트너명 입력"
+                : searchType === "2"
+                ? "고객사 번호 입력"
+                : searchType === "3"
+                ? "고객사명 또는 지점명 입력"
+                : "검색할 분류를 먼저 선택하세요"
+            }
             onChange={e => setSearchKeyword(e.currentTarget.value)}
             onKeyDown={e => e.key === "Enter" && searchIt()}
+            disabled={searchType === ""}
           />
           <button
             className="py-2 px-3 bg-green-600 hover:bg-green-700 text-white rounded transition-all duration-300"
@@ -141,11 +157,26 @@ function AdList() {
           </button>
           {keyword && (
             <div className="py-2">
-              <span className="text-red-600 font-neoextra">{keyword}</span>로
+              {type === "1"
+                ? "파트너명 "
+                : type === "2"
+                ? "고객사 번호 "
+                : type === "3"
+                ? "고객사명/지점명 "
+                : null}
+              <span className="text-red-600 font-neoextra">{keyword}</span> 로
               검색한 결과입니다.
             </div>
           )}
         </div>
+        <button
+          className="py-2 px-5 bg-blue-600 text-white rounded-lg min-w-[100px]"
+          onClick={() => {
+            setModalOn(true);
+          }}
+        >
+          광고 등록
+        </button>
       </div>
       {list && list.length > 0 ? (
         <table className="border-collapse text-sm">
@@ -485,6 +516,7 @@ function AdList() {
       <Pagenate
         page={Number(page)}
         keyword={keyword}
+        type={String(type)}
         totalPage={Number(totalPage)}
         pagenate={pagenate}
         pathName={pathName}

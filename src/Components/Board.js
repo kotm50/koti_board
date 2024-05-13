@@ -29,7 +29,7 @@ function Board() {
   return (
     <>
       <div
-        className="fixed top-0 left-0 h-screen w-[240px] pb-4 border-r bg-white shadow-lg flex flex-col justify-between transition-all duration-300"
+        className="fixed top-0 left-0 h-screen w-[240px] pb-4 border-r bg-white shadow-lg flex flex-col justify-between transition-all duration-300 z-[999999]"
         style={{ marginLeft: `${open ? 0 : -240}px` }}
       >
         <button

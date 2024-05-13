@@ -9,12 +9,18 @@ import {
 
 function Pagenate(props) {
   const [isSearching, setIsSearching] = useState(false);
+  const [isType, setIsType] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   useEffect(() => {
     if (props.keyword && props.keyword !== "") {
       setIsSearching(true);
     } else {
       setIsSearching(false);
+    }
+    if (props.isType && props.isType !== "") {
+      setIsType(true);
+    } else {
+      setIsType(false);
     }
     if (props.delYn && props.delYn !== "N") {
       setIsDelete(true);
@@ -30,8 +36,10 @@ function Pagenate(props) {
           {props.page > 2 && (
             <Link
               to={`${props.pathName}?page=1${
-                isSearching ? `&keyword=${props.keyword}` : ""
-              }${isDelete ? `&delYn=Y` : ""}`}
+                isType ? `&type=${props.type}` : ""
+              }${isSearching ? `&keyword=${props.keyword}` : ""}${
+                isDelete ? `&delYn=Y` : ""
+              }`}
               state={{ log: props.log }}
               className="transition duration-300 ease-in-out pageButton hover:scale-110 hidden xl:block"
             >
@@ -42,8 +50,10 @@ function Pagenate(props) {
           {props.page > 1 && (
             <Link
               to={`${props.pathName}?page=${props.page - 1}${
-                isSearching ? `&keyword=${props.keyword}` : ""
-              }${isDelete ? `&delYn=Y` : ""}`}
+                isType ? `&type=${props.type}` : ""
+              }${isSearching ? `&keyword=${props.keyword}` : ""}${
+                isDelete ? `&delYn=Y` : ""
+              }`}
               state={{ log: props.log }}
               className="transition duration-300 ease-in-out pageButton hover:scale-110"
             >
@@ -54,8 +64,10 @@ function Pagenate(props) {
             {props.pagenate.map((pageNum, idx) => (
               <Link
                 to={`${props.pathName}?page=${pageNum}${
-                  isSearching ? `&keyword=${props.keyword}` : ""
-                }${isDelete ? `&delYn=Y` : ""}`}
+                  isType ? `&type=${props.type}` : ""
+                }${isSearching ? `&keyword=${props.keyword}` : ""}${
+                  isDelete ? `&delYn=Y` : ""
+                }`}
                 state={{ log: props.log }}
                 key={idx}
                 className={`transition duration-300 ease-in-out pageButton hover:scale-110 ${
@@ -69,8 +81,10 @@ function Pagenate(props) {
           {props.page < props.totalPage && (
             <Link
               to={`${props.pathName}?page=${props.page + 1}${
-                isSearching ? `&keyword=${props.keyword}` : ""
-              }${isDelete ? `&delYn=Y` : ""}`}
+                isType ? `&type=${props.type}` : ""
+              }${isSearching ? `&keyword=${props.keyword}` : ""}${
+                isDelete ? `&delYn=Y` : ""
+              }`}
               state={{ log: props.log }}
               className="transition duration-300 ease-in-out pageButton hover:scale-110"
             >
@@ -80,8 +94,10 @@ function Pagenate(props) {
           {props.page < props.totalPage && (
             <Link
               to={`${props.pathName}?page=${props.totalPage}${
-                isSearching ? `&keyword=${props.keyword}` : ""
-              }${isDelete ? `&delYn=Y` : ""}`}
+                isType ? `&type=${props.type}` : ""
+              }${isSearching ? `&keyword=${props.keyword}` : ""}${
+                isDelete ? `&delYn=Y` : ""
+              }`}
               state={{ log: props.log }}
               className="transition duration-300 ease-in-out pageButton hover:scale-110 hidden xl:block"
             >

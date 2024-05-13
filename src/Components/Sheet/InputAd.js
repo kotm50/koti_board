@@ -44,6 +44,8 @@ function InputAd(props) {
 
   const resetIt = () => {
     setProgCode("");
+    setPartnerName("");
+    setPartnerId("");
     setCompCode("");
     setCompName("");
     setPaymentOption("");
@@ -71,6 +73,8 @@ function InputAd(props) {
     await getCommList("DU", "Y");
     if (doc) {
       setProgCode(doc.progCode || "");
+      setPartnerId(doc.userId || "");
+      setPartnerName(doc.userName || "");
       setCompCode(doc.compCode || "");
       setCompName(doc.compName ? `${doc.compName} ${doc.compBranch}` : "");
       setPaymentOption(doc.paymentOption || "");

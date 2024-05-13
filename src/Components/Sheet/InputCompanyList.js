@@ -32,7 +32,7 @@ function InputCompanyList(props) {
     setLoadMsg("검색 중 입니다...");
     const data = {
       page: 1,
-      size: 100,
+      size: 999,
       searchKeyword: c,
     };
     await axiosInstance
@@ -80,7 +80,7 @@ function InputCompanyList(props) {
               </tr>
             </thead>
             <tbody>
-              {companyList.slice(0, 30).map((com, idx) => (
+              {companyList.map((com, idx) => (
                 <tr key={idx}>
                   <td className="p-2 text-center truncate">{com.adNum}</td>
                   <td className="p-2 text-center truncate">{com.compName}</td>
@@ -104,27 +104,30 @@ function InputCompanyList(props) {
               ))}
             </tbody>
           </table>
-          {companyList.length > 30 && (
-            <div className="text-center">
-              검색결과가 너무 많습니다.
-              <br />
-              지점명 또는 담당자명으로 다시 검색해 보세요
-            </div>
-          )}
         </div>
       ) : (
-        <div className="m-auto text-center h-full py-5">{loadMsg}</div>
+        <div className="m-auto text-center py-5">{loadMsg}</div>
       )}
-      <button
-        className="sticky bottom-0 min-w-fit p-2 w-full bg-orange-500 hover:bg-orange-700 text-white rounded mb-2"
-        onClick={() => {
-          props.setCompCode("");
-          props.setCompName("");
-          props.setSearchComp(false);
-        }}
-      >
-        창닫기/초기화
-      </button>
+      <div className="grid grid-cols-2 gap-x-2">
+        <button
+          className="sticky bottom-0 min-w-fit p-2 w-full bg-blue-500 hover:bg-blue-700 text-white rounded mb-2"
+          onClick={() => {
+            props.setSearchComp(false);
+          }}
+        >
+          창 닫기(내용유지)
+        </button>
+        <button
+          className="sticky bottom-0 min-w-fit p-2 w-full bg-red-500 hover:bg-red-700 text-white rounded mb-2"
+          onClick={() => {
+            props.setCompCode("");
+            props.setCompName("");
+            props.setSearchComp(false);
+          }}
+        >
+          창 닫기(내용삭제)
+        </button>
+      </div>
     </div>
   );
 }
